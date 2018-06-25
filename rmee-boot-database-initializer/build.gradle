@@ -1,0 +1,12 @@
+apply plugin: JavaDefaultsPlugin
+
+dependencies {
+	compile 'commons-lang:commons-lang:2.3'
+	compileOnly project(':rmee-boot-cli')
+	compileOnly 'org.flywaydb:flyway-core'
+	compileOnly 'org.springframework.boot:spring-boot-starter'
+
+	testCompile 'org.springframework.boot:spring-boot-starter'
+	testCompile 'org.springframework:spring-orm'
+}
+

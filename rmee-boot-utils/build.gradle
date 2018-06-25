@@ -1,0 +1,15 @@
+apply plugin: JavaDefaultsPlugin
+
+dependencies {
+	compileOnly project(':rmee-boot-cli')
+
+	compileOnly 'org.springframework.boot:spring-boot-starter'
+	compileOnly 'org.springframework:spring-orm'
+	compileOnly 'org.hibernate:hibernate-core'
+
+	testCompile 'org.springframework.boot:spring-boot-starter'
+	testCompile 'org.springframework:spring-orm'
+
+	compileOnly 'org.flywaydb:flyway-core'
+	compileOnly 'info.faljse:SDNotify:1.1'
+}

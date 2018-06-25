@@ -1,0 +1,28 @@
+include 'rmee-boot-cli',
+		'rmee-boot-utils',
+		'rmee-boot-database-initializer'
+
+
+gradle.beforeProject { Project project ->
+	project.with {
+
+		// get password from environment if available
+		String sonarLogin = System.env['SONAR_LOGIN']
+		if (sonarLogin) {
+			System.setProperty("sonar.login", sonarLogin)
+		}
+
+		buildscript {
+			repositories {
+				maven {
+					url('https://plugins.gradle.org/m2')
+				}
+			}
+		}
+		repositories {
+			mavenCentral()
+		}
+		version = rootProject.version
+		group = rootProject.group
+	}
+}
