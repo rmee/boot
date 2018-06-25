@@ -1,4 +1,5 @@
-apply plugin: JavaDefaultsPlugin
+apply plugin: 'java'
+apply plugin: 'jacoco'
 
 dependencies {
 	compileOnly project(':rmee-boot-cli')
