@@ -234,6 +234,12 @@ gradle.beforeProject { Project project ->
 	}
 }
 
+//
+
+task promote {
+	// TODO
+}
+
 // coveralls setup
 apply plugin: "jacoco"
 apply plugin: "com.github.kt3k.coveralls"
