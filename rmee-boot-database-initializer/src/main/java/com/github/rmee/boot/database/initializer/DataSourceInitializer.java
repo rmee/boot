@@ -77,8 +77,10 @@ public class DataSourceInitializer {
 			try {
 				for (int i = 0; i < sqls.length; i++) {
 					sql = sqls[i].trim();
-					LOGGER.debug("executing {}", sql);
-					stmt.executeUpdate(sql);
+					if(!sql.isEmpty()) {
+						LOGGER.debug("executing {}", sql);
+						stmt.executeUpdate(sql);
+					}
 				}
 			}
 			catch (SQLException e) {
