@@ -70,12 +70,17 @@ public class ApplicationCli {
 		try {
 			CommandLine commandLine = mainCommand.getCommandLine();
 			List<CommandLine> parsed = commandLine.parse(args);
-			ApplicationCommand command = (ApplicationCommand) parsed.get(parsed.size() - 1).getCommand();
+			ApplicationCommand command = parsed.get(parsed.size() - 1).getCommand();
 			command.run(new DefaultApplicationCommandContext());
+		}
+		catch (CliException e) {
+			output.error(e.getMessage());
+			LOGGER.debug("failed to execute " + Arrays.toString(args), e);
+			System.exit(1);
 		}
 		catch (CommandLine.MissingParameterException e) {
 			output.error(e.getMessage() + " in command '" + Arrays.toString(args) + "'");
-			LOGGER.warn("failed to execute " + Arrays.toString(args), e);
+			LOGGER.debug("failed to execute " + Arrays.toString(args), e);
 			System.exit(1);
 		}
 		catch (Exception e) {
