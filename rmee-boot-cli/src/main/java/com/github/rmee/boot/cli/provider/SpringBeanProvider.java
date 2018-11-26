@@ -4,6 +4,7 @@ package com.github.rmee.boot.cli.provider;
 import com.github.rmee.boot.cli.CliException;
 import org.springframework.beans.factory.UnsatisfiedDependencyException;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBindException;
 import org.springframework.boot.context.properties.bind.BindException;
 import org.springframework.boot.context.properties.bind.validation.BindValidationException;
@@ -39,7 +40,7 @@ public class SpringBeanProvider implements BeanProvider {
 
 		try {
 			application = new SpringApplication(configurationClass);
-			application.setWebEnvironment(false);
+			application.setWebApplicationType(WebApplicationType.NONE);
 			context = application.run();
 		}
 		catch (UnsatisfiedDependencyException e) {

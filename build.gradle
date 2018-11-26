@@ -77,7 +77,7 @@ gradle.beforeProject { Project project ->
 				apply plugin: 'io.spring.dependency-management'
 				dependencyManagement {
 					imports {
-						mavenBom 'org.springframework.boot:spring-boot-dependencies:2.0.1.RELEASE'
+						mavenBom 'org.springframework.boot:spring-boot-dependencies:2.1.0.RELEASE'
 					}
 				}
 			}
