@@ -106,7 +106,7 @@ public class ApplicationCli {
 
 		@Override
 		public void debug(Optional<String[]> loggerNames) {
-			if (loggerNames.isPresent()) {
+			if (!loggerNames.isPresent()) {
 				// by default enable debug for application
 				ch.qos.logback.classic.Logger dbLogger = (ch.qos.logback.classic.Logger) org.slf4j.LoggerFactory
 						.getLogger(mainPackage.getName());
