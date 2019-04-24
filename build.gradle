@@ -151,6 +151,7 @@ gradle.beforeProject { Project project ->
 					}
 				}
 
+				
 				scm {
 					url "https://github.com/rmee/boot"
 				}
