@@ -2,7 +2,9 @@ package com.github.rmee.boot.utils.proxy;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +32,6 @@ public class ProxyConfiguration implements InitializingBean {
 			props.put("http.proxyPort", properties.getPort());
 			props.put("https.proxyHost", properties.getHost());
 			props.put("https.proxyPort", properties.getPort());
-
 			if (properties.getExclude() != null) {
 				LOGGER.debug("using no proxy for {}", properties.getExclude());
 				props.put("no_proxy", properties.getExclude());
@@ -42,6 +43,14 @@ public class ProxyConfiguration implements InitializingBean {
 		}
 		else {
 			LOGGER.debug("no proxy configured");
+		}
+
+		String no_proxy = System.getenv("NO_PROXY");
+		if (no_proxy != null) {
+			// see https://docs.oracle.com/javase/7/docs/api/java/net/doc-files/net-properties.html
+			String javaNoProxy = Arrays.asList(no_proxy.split("\\,")).stream().map(it -> it.startsWith(".") ? "*" + it : it).collect(Collectors.joining("|"));
+			System.setProperty("http.nonProxyHosts", javaNoProxy);
+			System.setProperty("https.nonProxyHosts", javaNoProxy);
 		}
 	}
 
