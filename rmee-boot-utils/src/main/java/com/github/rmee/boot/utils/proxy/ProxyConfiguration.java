@@ -37,7 +37,7 @@ public class ProxyConfiguration implements InitializingBean {
 				props.put("no_proxy", properties.getExclude());
 			}
 		}
-		else if (System.getenv("HTTP_PROXY") != null || System.getenv("HTTPS_PROXY") != null) {
+		else if (getEnv("HTTP_PROXY") != null || getEnv("HTTPS_PROXY") != null) {
 			setupProxy("http");
 			setupProxy("https");
 		}
@@ -45,7 +45,7 @@ public class ProxyConfiguration implements InitializingBean {
 			LOGGER.debug("no proxy configured");
 		}
 
-		String no_proxy = System.getenv("NO_PROXY");
+		String no_proxy = getEnv("NO_PROXY");
 		if (no_proxy != null) {
 			// see https://docs.oracle.com/javase/7/docs/api/java/net/doc-files/net-properties.html
 			String javaNoProxy = Arrays.asList(no_proxy.split("\\,")).stream().map(it -> it.startsWith(".") ? "*" + it : it).collect(Collectors.joining("|"));
@@ -56,7 +56,7 @@ public class ProxyConfiguration implements InitializingBean {
 
 	private static void setupProxy(String name) {
 		String envName = name.toUpperCase() + "_PROXY";
-		String value = System.getenv(envName);
+		String value = getEnv(envName);
 		if (value != null) {
 			URL url;
 			try {
@@ -69,6 +69,14 @@ public class ProxyConfiguration implements InitializingBean {
 			System.setProperty(name + ".proxyHost", url.getHost());
 			System.setProperty(name + ".proxyPort", Integer.toString(url.getPort()));
 		}
+	}
+
+	private static String getEnv(String envName) {
+		String value = System.getenv(envName.toUpperCase());
+		if (value == null) {
+			value = System.getenv(envName.toLowerCase());
+		}
+		return value;
 	}
 }
 
