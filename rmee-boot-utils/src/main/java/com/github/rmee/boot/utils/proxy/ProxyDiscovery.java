@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 
 public class ProxyDiscovery {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ProxyConfiguration.class);
-	
+	private static final Logger LOGGER = LoggerFactory.getLogger(ProxyDiscovery.class);
+
 	public static void readFromEnv() {
 
 		if (getEnv("HTTP_PROXY") != null || getEnv("HTTPS_PROXY") != null) {
